@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+    tools{
+        maven 'mvn3.10.11'
+}          
+    stages{
+        stage('git clone'){
+            steps{
+                git branch: 'main', url: 'https://github.com/ns-kaashiv/todo.git'
+            }
+        }
+             stage('print PATH'){
+            steps{ 
+                sh 'echo $PATH'
+            }
+        }
+            stage('maven test stage'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('maven build stage'){
+            steps{ 
+                sh 'mvn clean install -DskipTests=true'
+            }
+        }
+           stage('docker image build'){
+            steps{ 
+                sh 'docker build -t todo -jenkins-local .'
+            }
+        }  
+    }
+}
