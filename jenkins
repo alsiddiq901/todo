@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('git clone'){
             steps{
-                git branch: 'main', url: 'https://github.com/ns-kaashiv/todo.git'
+                git branch: 'main', url: 'https://github.com/alsiddiq901/todo'
             }
         }
              stage('print PATH'){
